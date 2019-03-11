@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ClassicCounter;
+namespace Piwik\Plugins\ClassicDownloadsCounter;
 
 use Piwik\Cache;
 use Piwik\Common;
@@ -33,11 +33,11 @@ class Controller extends \Piwik\Plugin\Controller
         $idSite = Common::getRequestVar('idSite', $this->idSite, 'int');
 
         $cache = Cache::getLazyCache();
-        $cacheKey = "ClassicCounter_Visits_" . $idSite;
+        $cacheKey = "ClassicDownloadsCounter_Visits_" . $idSite;
         if ($cache->contains($cacheKey)) {
             $visitCount = $cache->fetch($cacheKey);
         } else {
-            $visitCount = ClassicCounter::getVisitorCount($idSite);
+            $visitCount = ClassicDownloadsCounter::getVisitorCount($idSite);
             $cache->save($cacheKey, $visitCount, 60);
         }
 
